@@ -1,6 +1,6 @@
-package ru.hh.lesson.examples.evolution.stage_2;
+package ru.hh.lesson.examples.bean_name_and_qualifier;
 
-import jakarta.persistence.EntityManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,17 +12,9 @@ import ru.hh.lesson.model.VacancyList;
 class VacancyResource {
   private final VacancyService vacancyService;
 
-  VacancyResource() {
-    EntityManager entityManager = initEntityManager();
-    vacancyService = new VacancyService(
-        new EmployerService(new EmployerDao(entityManager)),
-        new VacancyDao(entityManager)
-    );
-  }
-
-  private static EntityManager initEntityManager() {
-    // Как-то создаем и настраиваем EntityManager
-    return null;
+  @Autowired
+  VacancyResource(VacancyService vacancyService) {
+    this.vacancyService = vacancyService;
   }
 
   @GetMapping

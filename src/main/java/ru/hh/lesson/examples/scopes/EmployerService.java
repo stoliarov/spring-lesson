@@ -17,6 +17,8 @@ class EmployerService {
   }
 
   Employer getEmployer(int id) {
-    return employerDao.findById(id);
+    return employerDao.findById(id)
+        .map(e -> new Employer(e.getId(), e.getDescription()))
+        .orElse(null);
   }
 }

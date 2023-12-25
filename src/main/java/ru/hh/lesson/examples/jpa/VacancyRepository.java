@@ -12,4 +12,6 @@ public interface VacancyRepository extends CrudRepository<VacancyEntity, Integer
   @Query("SELECT vacancy FROM VacancyEntity vacancy " +
       "WHERE vacancy.employerId = :employerId")
   List<VacancyEntity> findAllByEmployerId(Integer employerId);
+
+  List<VacancyEntity> findAllByIdAndEmployerIdOrderByEmployerId(Integer id, Integer employerId);
 }

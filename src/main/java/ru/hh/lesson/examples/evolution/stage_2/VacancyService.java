@@ -1,7 +1,9 @@
 package ru.hh.lesson.examples.evolution.stage_2;
 
 import java.util.List;
+import ru.hh.lesson.model.Employer;
 import ru.hh.lesson.model.Vacancy;
+import ru.hh.lesson.model.VacancyList;
 
 class VacancyService {
   private final EmployerService employerService;
@@ -12,8 +14,11 @@ class VacancyService {
     this.vacancyDao = vacancyDao;
   }
 
-  List<Vacancy> getAllVacanciesByEmployer(int employerId) {
-    // Как-то используем vacancyDao и employerService
-    return List.of();
+  VacancyList getAllVacanciesByEmployer(int employerId) {
+    List<Vacancy> vacancies = vacancyDao.findByEmployerId(employerId).stream()
+        .map(v -> new Vacancy(v.getId(), v.getEmployerId(), v.getTitle(), v.getDescription()))
+        .toList();
+    Employer employer = employerService.getEmployer(employerId);
+    return new VacancyList(employer, vacancies);
   }
 }

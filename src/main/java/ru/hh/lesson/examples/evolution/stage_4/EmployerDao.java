@@ -1,21 +1,29 @@
 package ru.hh.lesson.examples.evolution.stage_4;
 
+import jakarta.persistence.EntityManager;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import ru.hh.lesson.model.Employer;
+import ru.hh.lesson.entity.EmployerEntity;
 
 @Repository
 class EmployerDao {
-  private final JdbcTemplate jdbcTemplate;
+  private final EntityManager entityManager;
 
   @Autowired
-  EmployerDao(JdbcTemplate jdbcTemplate) {
-    this.jdbcTemplate = jdbcTemplate;
+  EmployerDao(EntityManager entityManager) {
+    this.entityManager = entityManager;
   }
 
-  Employer findById(int id) {
-    // якобы нашли это в БД
-    return new Employer(id, "Отличная компания, работайте только у нас");
+  Optional<EmployerEntity> findById(int id) {
+    return entityManager.createQuery(
+            "SELECT employer FROM EmployerEntity employer " +
+                "WHERE employer.id = :employerId",
+            EmployerEntity.class
+        )
+        .setParameter("employerId", id)
+        .getResultList()
+        .stream()
+        .findFirst();
   }
 }

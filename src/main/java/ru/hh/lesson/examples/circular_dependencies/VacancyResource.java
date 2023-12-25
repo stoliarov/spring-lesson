@@ -1,15 +1,14 @@
 package ru.hh.lesson.examples.circular_dependencies;
 
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.hh.lesson.model.Vacancy;
+import ru.hh.lesson.model.VacancyList;
 
 @RestController
-@RequestMapping("/v4/vacancy")
+@RequestMapping("/v1/vacancy")
 class VacancyResource {
   private final VacancyService vacancyService;
 
@@ -19,7 +18,7 @@ class VacancyResource {
   }
 
   @GetMapping
-  List<Vacancy> getVacancies(@RequestParam Integer employerId) {
+  VacancyList getVacancies(@RequestParam Integer employerId) {
     return vacancyService.getAllVacanciesByEmployer(employerId);
   }
 }

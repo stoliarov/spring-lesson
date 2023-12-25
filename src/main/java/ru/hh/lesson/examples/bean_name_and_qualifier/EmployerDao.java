@@ -1,12 +1,10 @@
-package ru.hh.lesson.examples.import_and_scan;
+package ru.hh.lesson.examples.bean_name_and_qualifier;
 
 import jakarta.persistence.EntityManager;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import ru.hh.lesson.entity.EmployerEntity;
 
-@Component
 class EmployerDao {
   private final EntityManager entityManager;
 

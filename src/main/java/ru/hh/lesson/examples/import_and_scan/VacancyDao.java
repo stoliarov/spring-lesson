@@ -1,19 +1,27 @@
 package ru.hh.lesson.examples.import_and_scan;
 
+import jakarta.persistence.EntityManager;
 import java.util.List;
-import org.springframework.jdbc.core.JdbcTemplate;
-import ru.hh.lesson.model.Vacancy;
+import ru.hh.lesson.entity.VacancyEntity;
 
 class VacancyDao {
-  private final JdbcTemplate jdbcTemplate;
-//  private final Object someString;
+  private final EntityManager entityManager;
+  private final String someString;
 
-  VacancyDao(JdbcTemplate jdbcTemplate) {
-    this.jdbcTemplate = jdbcTemplate;
+  VacancyDao(EntityManager entityManager, String someString) {
+    this.entityManager = entityManager;
+    this.someString = someString;
   }
 
-  List<Vacancy> findByEmployerId(int employerId) {
-    // якобы нашли это в БД
-    return List.of(new Vacancy(1, employerId, "Java Developer", "Ищем java-разработчика. Требования: ..."));
+  List<VacancyEntity> findByEmployerId(int employerId) {
+    System.out.println(someString);
+
+    return entityManager.createQuery(
+            "SELECT vacancy FROM VacancyEntity vacancy " +
+                "WHERE vacancy.employerId = :employerId",
+            VacancyEntity.class
+        )
+        .setParameter("employerId", employerId)
+        .getResultList();
   }
 }

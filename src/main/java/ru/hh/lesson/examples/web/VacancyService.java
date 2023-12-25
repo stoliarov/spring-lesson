@@ -18,12 +18,11 @@ class VacancyService {
 
   Vacancy getVacancy(int vacancyId) {
     // Нашли в базе и возвращаем
-    employerService, vacancyDao
     return new Vacancy();
   }
 
   List<Vacancy> getAllVacanciesByEmployer(int employerId) {
-    // Как-то используем vacancyDao и employerService
+    // Нашли все вакансии в базе и возвращаем
     return List.of();
   }
 

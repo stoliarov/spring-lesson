@@ -4,16 +4,16 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import static org.springframework.web.context.WebApplicationContext.SCOPE_REQUEST;
 
-@Scope(value = SCOPE_REQUEST)
+@Scope(SCOPE_REQUEST)
 @Component
-class EmployerDetails {
-  private String userRegion;
+class Locale {
+  private String lang;
 
-  public String getUserRegion() {
-    return userRegion;
+  public String getLang() {
+    return lang;
   }
 
-  public void setUserRegion(String userRegion) {
-    this.userRegion = userRegion;
+  public void setLang(String lang) {
+    this.lang = lang;
   }
 }

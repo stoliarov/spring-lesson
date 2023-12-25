@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Import;
 
 @Configuration
 @Import(value = {
-    VacancyDao.class,
+    EmployerDao.class,
     EmployerService.class,
     Config.class
 })

@@ -10,10 +10,12 @@ import ru.hh.lesson.model.Vacancy;
 @Component
 class VacancyService {
   private final VacancyDao vacancyDao;
+  private final TransactionHelper transactionHelper;
 
   @Autowired
-  VacancyService(VacancyDao vacancyDao) {
+  VacancyService(VacancyDao vacancyDao, TransactionHelper transactionHelper) {
     this.vacancyDao = vacancyDao;
+    this.transactionHelper = transactionHelper;
   }
 
   List<Vacancy> getAllVacanciesByEmployerWithProblem(int employerId) {

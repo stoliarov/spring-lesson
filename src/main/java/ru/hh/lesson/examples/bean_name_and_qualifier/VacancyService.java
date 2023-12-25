@@ -1,7 +1,8 @@
-package ru.hh.lesson.examples.evolution.stage_4;
+package ru.hh.lesson.examples.bean_name_and_qualifier;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import ru.hh.lesson.model.Employer;
 import ru.hh.lesson.model.Vacancy;
@@ -13,7 +14,7 @@ class VacancyService {
   private final VacancyDao vacancyDao;
 
   @Autowired
-  VacancyService(EmployerService employerService, VacancyDao vacancyDao) {
+  VacancyService(@Qualifier("salam") EmployerService employerService, VacancyDao vacancyDao) {
     this.employerService = employerService;
     this.vacancyDao = vacancyDao;
   }

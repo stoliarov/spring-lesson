@@ -1,22 +1,27 @@
 package ru.hh.lesson.examples.evolution.stage_3;
 
-import org.springframework.jdbc.core.JdbcTemplate;
+import jakarta.persistence.EntityManager;
 
 class Factory {
   private static Factory instance;
 
-  private final JdbcTemplate jdbcTemplate;
+  private final EntityManager entityManager;
   private final EmployerDao employerDao;
   private final VacancyDao vacancyDao;
   private final EmployerService employerService;
   private final VacancyService vacancyService;
 
   private Factory() {
-    this.jdbcTemplate = new JdbcTemplate();
-    this.employerDao = new EmployerDao(jdbcTemplate);
-    this.vacancyDao = new VacancyDao(jdbcTemplate);
+    this.entityManager = initEntityManager();
+    this.employerDao = new EmployerDao(entityManager);
+    this.vacancyDao = new VacancyDao(entityManager);
     this.employerService = new EmployerService(employerDao);
     this.vacancyService = new VacancyService(employerService, vacancyDao);
+  }
+
+  private static EntityManager initEntityManager() {
+    // Как-то создаем и настраиваем EntityManager
+    return null;
   }
 
   static synchronized Factory getInstance() {
@@ -26,8 +31,8 @@ class Factory {
     return instance;
   }
 
-  JdbcTemplate getJdbcTemplate() {
-    return jdbcTemplate;
+  EntityManager getEntityManager() {
+    return entityManager;
   }
 
   EmployerDao getEmployerDao() {

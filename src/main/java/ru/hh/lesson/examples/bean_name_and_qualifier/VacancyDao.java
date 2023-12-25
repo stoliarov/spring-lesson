@@ -1,15 +1,18 @@
-package ru.hh.lesson.examples.evolution.stage_1;
+package ru.hh.lesson.examples.bean_name_and_qualifier;
 
 import jakarta.persistence.EntityManager;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ru.hh.lesson.entity.VacancyEntity;
 
+@Component
 class VacancyDao {
-  private final EntityManager entityManager = initEntityManager();
+  private final EntityManager entityManager;
 
-  private static EntityManager initEntityManager() {
-    // Как-то создаем и настраиваем EntityManager
-    return null;
+  @Autowired
+  VacancyDao(EntityManager entityManager) {
+    this.entityManager = entityManager;
   }
 
   List<VacancyEntity> findByEmployerId(int employerId) {

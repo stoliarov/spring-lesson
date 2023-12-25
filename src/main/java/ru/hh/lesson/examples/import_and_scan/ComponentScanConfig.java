@@ -7,8 +7,9 @@ import org.springframework.stereotype.Repository;
 
 @Configuration
 @ComponentScan(
-    basePackages = "ru.hh.lesson.model",
+    basePackages = {"ru.hh.lesson.model"},
     includeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = EmployerService.class),
-    excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = Repository.class))
+    excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = Repository.class)
+)
 public class ComponentScanConfig {
 }

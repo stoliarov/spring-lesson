@@ -6,14 +6,16 @@ import ru.hh.lesson.model.Employer;
 
 @Service
 class EmployerService {
-  private final EmployerDao employerDao;
+  private EmployerDao employerDao;
 
   @Autowired
-  EmployerService(EmployerDao employerDao) {
+  void setEmployerDao(EmployerDao employerDao) {
     this.employerDao = employerDao;
   }
 
   Employer getEmployer(int id) {
-    return employerDao.findById(id);
+    return employerDao.findById(id)
+        .map(e -> new Employer(e.getId(), e.getDescription()))
+        .orElse(null);
   }
 }
